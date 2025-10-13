@@ -1,3 +1,5 @@
+package zookeeper;
+
 public class Kambing extends Animal {
     public Kambing(String name){
         super(name);

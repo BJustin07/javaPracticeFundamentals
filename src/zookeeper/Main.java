@@ -4,11 +4,15 @@ import com.sun.source.tree.WhileLoopTree;
 import zookeeper.enums.MainMenu;
 
 import java.sql.SQLOutput;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.printf("Hello and welcome to bjustin's Zoo! \n");
+        Zoo zoo = new Zoo();
+        List<Animal> animals = new ArrayList<>();
+        System.out.print("Hello and welcome to bjustin's Zoo! \n");
         System.out.println("Please select action \n");
         Scanner input = new Scanner(System.in);
 
@@ -16,7 +20,8 @@ public class Main {
                 try{
                     System.out.println("1 - Add Animals");
                     System.out.println("2 - List Animals");
-                    System.out.println("3 - Exit \n");
+                    System.out.println("3 - LookUp Animals");
+                    System.out.println("4 - Exit \n");
                     int choice = input.nextInt();
                     switch (choice){
                     case  1: {
@@ -30,10 +35,12 @@ public class Main {
                                 if (animalTypeInput == 1){
                                     Animal kambing = new Kambing(animalName);
                                     kambing.makeSound();
+                                    zoo.addAnimal(kambing);
                                     break;
                                 }else if(animalTypeInput == 2){
                                     Animal kalapati = new Kalapati(animalName);
                                     kalapati.makeSound();
+                                    zoo.addAnimal(kalapati);
                                     break;
                                 }else{
                                     System.out.println("Invalid input(s)");
@@ -46,10 +53,16 @@ public class Main {
                         break;
                     }
                         case 2: {
-                            System.out.println("List of animals....");
+                           zoo.getAnimals();
                             break;
                         }
-                        case  3: {
+                        case 3: {
+                            System.out.println("Please provide animal name: ");
+                            String animalName = input.next();
+                            zoo.lookUpAnimal(animalName);
+                            break;
+                        }
+                        case  4: {
                             System.out.println("Exiting application...");
                             System.exit(0);
                         }

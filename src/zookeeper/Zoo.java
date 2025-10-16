@@ -26,7 +26,10 @@ public class Zoo {
         }
     }
 
-    public void addAnimal(Animal animal){
+    public void addAnimal(Animal animal) throws InvalidAnimalException, ZooFullException {
+        if (animal == null || animal.getName() == null || animal.getName().isEmpty())  {
+            throw new InvalidAnimalException("Invalid/Null animal!");
+        }
         animals.add(animal);
         addAnimalLookup(animal.getName(), animal);
         String type = "";
@@ -44,7 +47,9 @@ public class Zoo {
             animalEnclosure.put(type, enclosure);
             System.out.println("Successfully added animal to enclosure! : " + type );
         }
-        enclosure.add(animal);
+        if (!isAnimalEnclosureFull(enclosure,type)){
+            enclosure.add(animal);
+        }
         System.out.println("Successfully added animal: " + animal.getName());
         return;
     }
@@ -73,6 +78,17 @@ public class Zoo {
         }else{
             System.out.println("Animal " + type + " not found!");
             return;
+        }
+    }
+
+    public boolean isAnimalEnclosureFull(List<Animal> enclosure, String enclosureType) throws ZooFullException{
+        //cap to max 5 animals per enclosure
+        Integer animalEnclosureSize = enclosure.size();
+        if (animalEnclosureSize < 6) {
+            System.out.println("Remaining space for: " + enclosureType + " is: " + (5-animalEnclosureSize));
+            return false;
+        } else {
+            throw new ZooFullException("Enclosure for: " + enclosureType + " is full!");
         }
     }
 }

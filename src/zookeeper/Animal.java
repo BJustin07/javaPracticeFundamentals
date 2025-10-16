@@ -16,6 +16,5 @@ public abstract class Animal {
     public void petAnimal(String petName){
         System.out.println("Petting: " + petName + " until he runs out of breath");
     }
-
 }
 

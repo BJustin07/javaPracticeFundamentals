@@ -35,13 +35,21 @@ public class Main {
 
                                 if (animalTypeInput == 1){
                                     Animal kambing = new Kambing(animalName);
-                                    kambing.makeSound();
-                                    zoo.addAnimal(kambing);
+                                    try{
+                                        zoo.addAnimal(kambing);
+                                        kambing.makeSound();
+                                    }catch (InvalidAnimalException | ZooFullException e){
+                                        System.out.println(e.getMessage());
+                                    }
                                     break;
                                 }else if(animalTypeInput == 2){
                                     Animal kalapati = new Kalapati(animalName);
-                                    kalapati.makeSound();
-                                    zoo.addAnimal(kalapati);
+                                    try{
+                                        zoo.addAnimal(kalapati);
+                                        kalapati.makeSound();
+                                    }catch (InvalidAnimalException | ZooFullException e){
+                                        System.out.println(e.getMessage());
+                                    }
                                     break;
                                 }else{
                                     System.out.println("Invalid input(s)");

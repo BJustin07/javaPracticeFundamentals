@@ -21,7 +21,8 @@ public class Main {
                     System.out.println("1 - Add Animals");
                     System.out.println("2 - List Animals");
                     System.out.println("3 - LookUp Animals");
-                    System.out.println("4 - Exit \n");
+                    System.out.println("4 - View Enclosure of Animals");
+                    System.out.println("5 - Exit \n");
                     int choice = input.nextInt();
                     switch (choice){
                     case  1: {
@@ -62,7 +63,13 @@ public class Main {
                             zoo.lookUpAnimal(animalName);
                             break;
                         }
-                        case  4: {
+                        case 4: {
+                            System.out.println("Please provide enclosure type: ");
+                            String enclosureType = input.next();
+                            zoo.viewEnclosure(enclosureType);
+                            break;
+                        }
+                        case  5: {
                             System.out.println("Exiting application...");
                             System.exit(0);
                         }

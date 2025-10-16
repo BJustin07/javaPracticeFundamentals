@@ -8,10 +8,12 @@ import java.util.Map;
 public class Zoo {
     private List<Animal> animals;
     private Map<String, Animal> animalLookup;
+    private HashMap<String, List<Animal>> animalEnclosure;
 
     public Zoo(){
         animals = new ArrayList<>();
         animalLookup = new HashMap<>();
+        animalEnclosure = new HashMap<>();
     }
 
     public void getAnimals() {
@@ -27,6 +29,22 @@ public class Zoo {
     public void addAnimal(Animal animal){
         animals.add(animal);
         addAnimalLookup(animal.getName(), animal);
+        String type = "";
+        if (animal instanceof Kambing){
+            type = "Mammal";
+        } else if (animal instanceof Kalapati) {
+            type = "Bird";
+        }else{
+            type = "Alien";
+        }
+
+        List<Animal> enclosure = animalEnclosure.get(type);
+        if (enclosure == null){
+            enclosure = new ArrayList<>();
+            animalEnclosure.put(type, enclosure);
+            System.out.println("Successfully added animal to enclosure! : " + type );
+        }
+        enclosure.add(animal);
         System.out.println("Successfully added animal: " + animal.getName());
         return;
     }
@@ -42,6 +60,18 @@ public class Zoo {
             animal.makeSound();
         }else{
             System.out.println("Animal " + animalName + " not found!");
+            return;
+        }
+    }
+
+    public void viewEnclosure(String type){
+        if (animalEnclosure.containsKey(type)){
+            List<Animal> enclosure = animalEnclosure.get(type);
+            for (Animal animal : enclosure){
+                System.out.println("Animal " + animal.getName() + " is in this enclosure: " + type);
+            }
+        }else{
+            System.out.println("Animal " + type + " not found!");
             return;
         }
     }
